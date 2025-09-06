@@ -130,7 +130,24 @@ NewButtonStyle.style.color = "white";
 NewButtonStyle.style.fontSize = "20px";
 NewButtonStyle.style.padding = "10px";
 NewButtonStyle.style.marginTop = "70px";
-let price;
+
+
+//creiamo il bottone per svuotare i campi
+
+const clearButton = document.createElement("button");
+clearButton.setAttribute("id", "bottone_cancella");
+clearButton.innerText = "Svuota i Campi";
+buttonContainer.appendChild(clearButton);
+
+const clearButtonStyle = document.querySelector(`#bottone_cancella`);
+clearButtonStyle.style.backgroundColor = "#2EB68B";
+clearButtonStyle.style.color = "white";
+clearButtonStyle.style.fontSize = "20px";
+clearButtonStyle.style.padding = "10px";
+clearButtonStyle.style.marginTop = "70px";
+
+
+//facciamo in modo che il primo tasto generi il biglietto.
 
 NewButton.addEventListener("click", () => {
     const name = nameInput.value;
@@ -163,12 +180,14 @@ NewButton.addEventListener("click", () => {
         }
 
     }
+
     const risultato = ageVerificator(age, km);
 
     const outsideTicketTitle = document.getElementById(`ticket_title_container`);
 
     const passenger = document.getElementById(`ticket_passenger`);
     const info = document.getElementById(`ticket_info`);
+
 
     const ticketContainerStyle = document.querySelector(`#ticket_container`);
     ticketContainerStyle.style.display = "flex";
@@ -178,8 +197,8 @@ NewButton.addEventListener("click", () => {
     ticketContainerStyle.style.backgroundColor = "#2EB68B";
     ticketContainerStyle.style.color = "white";
     ticketContainerStyle.style.fontSize = "25px";
-    ticketContainerStyle.style.width = "20%";
-    ticketContainerStyle.style.margin = "30px";
+    ticketContainerStyle.style.marginTop = "30px";
+    ticketContainerStyle.style.minWidth = "600px";
 
 
     const ticketTrainStyle = document.querySelector(`#ticket_train`); ticketTrainStyle.style.display = "flex";
@@ -194,11 +213,23 @@ NewButton.addEventListener("click", () => {
 
     const passengerStyle = document.querySelector(`#ticket_passenger`);
     passengerStyle.style.backgroundColor = "#7faadcff";
-    passengerStyle.style.padding = "10px";
+    passengerStyle.style.padding = "18px";
+    passengerStyle.style.display = "flex";
+    passengerStyle.style.justifyContent = "flex-start";
+    passengerStyle.style.alignItems = "center";
+    passengerStyle.style.gap = "5px";
+    passengerStyle.style.minWidth = "430px";
+    passengerStyle.style.fontSize = "15px";
 
     const infoStyle = document.querySelector(`#ticket_info`);
     infoStyle.style.backgroundColor = "#7faadcff";
-    infoStyle.style.padding = "10px";
+    infoStyle.style.padding = "18px";
+    infoStyle.style.display = "flex";
+    infoStyle.style.justifyContent = "center";
+    infoStyle.style.alignItems = "center";
+    infoStyle.style.fontSize = "15px";
+    infoStyle.style.gap = "5px";
+    infoStyle.style.maxWidth = "430px";
 
 
     const ticketTitle = document.createElement("h5");
@@ -207,7 +238,7 @@ NewButton.addEventListener("click", () => {
     outsideTicketTitle.appendChild(ticketTitle);
 
     const passengerInfo = document.createElement("p");
-    passengerInfo.innerText = "Passeggero:";
+    passengerInfo.innerText = "Utente:";
     passenger.appendChild(passengerInfo);
 
     const nameSurname = document.createElement("p");
@@ -215,19 +246,28 @@ NewButton.addEventListener("click", () => {
     nameSurname.innerText = name.toUpperCase() + " " + surname.toUpperCase();
     passenger.appendChild(nameSurname);
 
+    const generateCarrozza = document.createElement("p");
+    generateCarrozza.innerText = "Codice Biglietto: " + Math.floor(Math.random() * 1000) + 1;
+    info.appendChild(generateCarrozza);
+
     const infoTicket = document.createElement("p")
     infoTicket.innerText = "Tipo di biglietto: " + risultato.offerta;
     info.appendChild(infoTicket);
+    infoTicket.style.textAlign = "center";
 
     const priceTicket = document.createElement("p")
     priceTicket.innerText = "Costo del biglietto: " + risultato.price + " €";
     info.appendChild(priceTicket);
 
 
+});
 
 
+//ora facciamo in modo che il secondo tasto invece resetti il form.
+clearButton.addEventListener("click", () => {
+    nameInput.value = "";
+    surnameInput.value = "";
+    kmInput.value = "";
+    ageInput.value = "";
 
-})
-
-
-
+});
